@@ -1,0 +1,12 @@
+D:\Rakshith\MechineT\cloudn\EcomApi.Services\bin\Debug\net6.0\EcomApi.Services.deps.json
+D:\Rakshith\MechineT\cloudn\EcomApi.Services\bin\Debug\net6.0\EcomApi.Services.dll
+D:\Rakshith\MechineT\cloudn\EcomApi.Services\bin\Debug\net6.0\EcomApi.Services.pdb
+D:\Rakshith\MechineT\cloudn\EcomApi.Services\obj\Debug\net6.0\EcomApi.Services.GeneratedMSBuildEditorConfig.editorconfig
+D:\Rakshith\MechineT\cloudn\EcomApi.Services\obj\Debug\net6.0\EcomApi.Services.AssemblyInfoInputs.cache
+D:\Rakshith\MechineT\cloudn\EcomApi.Services\obj\Debug\net6.0\EcomApi.Services.AssemblyInfo.cs
+D:\Rakshith\MechineT\cloudn\EcomApi.Services\obj\Debug\net6.0\EcomApi.Services.csproj.CoreCompileInputs.cache
+D:\Rakshith\MechineT\cloudn\EcomApi.Services\obj\Debug\net6.0\EcomApi.Services.dll
+D:\Rakshith\MechineT\cloudn\EcomApi.Services\obj\Debug\net6.0\refint\EcomApi.Services.dll
+D:\Rakshith\MechineT\cloudn\EcomApi.Services\obj\Debug\net6.0\EcomApi.Services.pdb
+D:\Rakshith\MechineT\cloudn\EcomApi.Services\obj\Debug\net6.0\ref\EcomApi.Services.dll
+D:\Rakshith\MechineT\cloudn\EcomApi.Services\obj\Debug\net6.0\EcomApi.Services.csproj.AssemblyReference.cache
