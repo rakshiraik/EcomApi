@@ -1,0 +1,88 @@
+02-03-2024 19:34:56	This log contains information about the import schema operation into project 'EcomApi.Db' on computer 'DESKTOP-9I61FOT' by user 'Aykan'.
+02-03-2024 19:34:56	Import of database schema has started.
+02-03-2024 19:35:07	Gathering database credentials
+02-03-2024 19:35:07	Gathering database options
+02-03-2024 19:35:07	Gathering generic database scoped configuration option
+02-03-2024 19:35:07	Gathering users
+02-03-2024 19:35:07	Gathering roles
+02-03-2024 19:35:07	Gathering application roles
+02-03-2024 19:35:07	Gathering role memberships
+02-03-2024 19:35:07	Gathering filegroups
+02-03-2024 19:35:07	Gathering full-text catalogs
+02-03-2024 19:35:07	Gathering assemblies
+02-03-2024 19:35:07	Gathering certificates
+02-03-2024 19:35:07	Gathering asymmetric keys
+02-03-2024 19:35:07	Gathering symmetric keys
+02-03-2024 19:35:07	Gathering encrypted symmetric keys
+02-03-2024 19:35:07	Gathering schemas
+02-03-2024 19:35:07	Gathering XML schema collections
+02-03-2024 19:35:07	Gathering user-defined data types
+02-03-2024 19:35:07	Gathering user-defined types
+02-03-2024 19:35:07	Gathering table types
+02-03-2024 19:35:07	Gathering unique keys for table types
+02-03-2024 19:35:07	Gathering primary keys for table types
+02-03-2024 19:35:08	Gathering indexes for table types
+02-03-2024 19:35:08	Gathering check constraints for table types
+02-03-2024 19:35:08	Gathering default constraints for table types
+02-03-2024 19:35:08	Gathering partition functions
+02-03-2024 19:35:08	Gathering partition schemes
+02-03-2024 19:35:08	Gathering functions
+02-03-2024 19:35:08	Gathering encrypted functions
+02-03-2024 19:35:08	Gathering aggregates
+02-03-2024 19:35:08	Gathering procedures
+02-03-2024 19:35:08	Gathering encrypted procedures
+02-03-2024 19:35:08	Gathering tables
+02-03-2024 19:36:03	Gathering primary keys
+02-03-2024 19:36:03	Gathering unique constraints
+02-03-2024 19:36:03	Gathering foreign keys
+02-03-2024 19:36:03	Gathering default constraints
+02-03-2024 19:36:03	Gathering check constraints
+02-03-2024 19:36:03	Gathering views
+02-03-2024 19:36:03	Gathering encrypted views
+02-03-2024 19:36:03	Gathering indexes
+02-03-2024 19:36:03	Gathering statistics
+02-03-2024 19:36:03	Gathering full-text index stoplists
+02-03-2024 19:36:03	Gathering search property lists
+02-03-2024 19:36:03	Gathering search properties
+02-03-2024 19:36:03	Gathering full-text indexes
+02-03-2024 19:36:03	Gathering column store indexes
+02-03-2024 19:36:03	Gathering spatial indexes
+02-03-2024 19:36:03	Gathering XML indexes
+02-03-2024 19:36:03	Gathering Selective XML indexes
+02-03-2024 19:36:03	Gathering encrypted triggers
+02-03-2024 19:36:03	Gathering triggers
+02-03-2024 19:36:03	Gathering encrypted and clr ddl triggers
+02-03-2024 19:36:29	Gathering ddl triggers
+02-03-2024 19:36:29	Creating edge constraints
+02-03-2024 19:36:29	Gathering synonyms
+02-03-2024 19:36:29	Gathering defaults
+02-03-2024 19:36:29	Gathering data constraint uddt bindings
+02-03-2024 19:36:29	Gathering rules
+02-03-2024 19:36:29	Gathering data constraint uddt bindings
+02-03-2024 19:36:29	Gathering message types
+02-03-2024 19:36:29	Gathering queues
+02-03-2024 19:36:29	Gathering contracts
+02-03-2024 19:36:29	Gathering services
+02-03-2024 19:36:29	Gathering event notifications
+02-03-2024 19:36:29	Gathering remote service bindings
+02-03-2024 19:36:29	Gathering broker priorities
+02-03-2024 19:36:29	Gathering signatures
+02-03-2024 19:36:29	Gathering compression options
+02-03-2024 19:36:29	Gathering sequence types
+02-03-2024 19:36:29	Gathering security policies
+02-03-2024 19:36:29	Gather column encryption keys
+02-03-2024 19:36:29	Gathering column master keys
+02-03-2024 19:36:29	Gathering external data sources
+02-03-2024 19:36:29	Gathering external file formats
+02-03-2024 19:36:29	Gathering external tables
+02-03-2024 19:36:29	Gathering XML index compression options
+02-03-2024 19:36:29	Gathering extended properties
+02-03-2024 19:36:29	Gathering assemblies
+02-03-2024 19:36:29	Gathering credentials
+02-03-2024 19:36:29	Gathering logins
+02-03-2024 19:36:29	Gathering server audits
+02-03-2024 19:36:30	Scanning project for duplicate elements
+02-03-2024 19:36:30	Finished duplicate element processing
+02-03-2024 19:36:31	Finished importing database.
+02-03-2024 19:36:31	A summary of the import was saved to the following location: D:\Rakshith\MechineT\cloudn\EcomApi.Db\Import Schema Logs\EcomApi.Db_20240302020456.log
+02-03-2024 19:36:31	Click Finish to continue...
