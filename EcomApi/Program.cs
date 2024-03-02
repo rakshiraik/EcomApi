@@ -3,8 +3,8 @@ using EcomApi.Services;
 
 var builder = WebApplication.CreateBuilder(args);
 
-// Add services to the container.
-builder.Services.RegisterDependency();
+
+builder.Services.RegisterDependency();//custome dependency Register
 
 
 builder.Services.AddControllers();
