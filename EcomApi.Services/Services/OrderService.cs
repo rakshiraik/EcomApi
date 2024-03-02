@@ -1,5 +1,6 @@
 ﻿using EcomApi.Services.Models;
 using Microsoft.Extensions.Configuration;
+using System.Data;
 using System.Data.SqlClient;
 using System.Globalization;
 
@@ -10,11 +11,25 @@ namespace EcomApi.Services.Services
         private readonly IConfiguration _configuration;
         private readonly SqlConnection _dbConnection;
 
-
         public OrderService(IConfiguration configuration)
         {
             _configuration = configuration;
             _dbConnection = new SqlConnection(_configuration.GetConnectionString("DefaultDb"));
+        }
+
+        private  void CloseConnection(IDbConnection connection)
+        {
+            if (connection.State == ConnectionState.Open)
+            {
+                connection.Close();
+            }
+        }
+        public  void OpenConnection(IDbConnection connection)
+        {
+            if (connection.State == ConnectionState.Closed)
+            {
+                connection.Open();
+            }
         }
 
         public ApiResponseModel GetMostRecentOrder(string email, string customerId)
@@ -49,7 +64,7 @@ namespace EcomApi.Services.Services
                 command.Parameters.AddWithValue("@Email", email);
                 command.Parameters.AddWithValue("@CustomerId", customerId);
 
-                _dbConnection.Open();
+                OpenConnection(_dbConnection);
 
                 using (var reader = command.ExecuteReader())
                 {
@@ -83,8 +98,8 @@ namespace EcomApi.Services.Services
                         return apiResponse;
                     }
                 }
-               
-                _dbConnection.Close();
+                CloseConnection(_dbConnection);
+
             }
 
             return null!;
@@ -111,8 +126,7 @@ namespace EcomApi.Services.Services
             {
                 command.Parameters.AddWithValue("@CustomerId", customerId);
 
-                _dbConnection.Open();
-
+                OpenConnection(_dbConnection);
                 using (var reader = command.ExecuteReader())
                 {
                     if (reader.Read())
@@ -128,12 +142,12 @@ namespace EcomApi.Services.Services
                             Town = reader["TOWN"].ToString(),
                             Postcode = reader["POSTCODE"].ToString()
                         };
-                        _dbConnection.Close();
+                       
                         return customer;
                     }
                 }
 
-                
+                CloseConnection(_dbConnection);
             }
 
             return null; 
