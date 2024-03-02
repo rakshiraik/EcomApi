@@ -12,7 +12,8 @@ namespace EcomApi.Controllers
     {
 
         private readonly IOrderService _orderService;
-        public CustomerController(IOrderService orderService) { 
+        public CustomerController(IOrderService orderService)
+        {
 
             this._orderService = orderService;
 
@@ -23,16 +24,27 @@ namespace EcomApi.Controllers
         {
             try
             {
-                var result = _orderService.GetMostRecentOrder(request.User, request.CustomerId);
+                var customer = _orderService.GetCustomerById(request.CustomerId);
 
-                if (result != null)
+                if (customer != null)
                 {
-                    return Ok(result);
+
+                    if (customer.Email != request.User)
+                    {
+                        return NotFound("Invalid request: CustomerId and Email not belongs to same user");
+
+                    }
+                    else
+                    {
+                        var result = _orderService.GetMostRecentOrder(request.User, request.CustomerId);
+                        return Ok(result);
+                    }
                 }
                 else
                 {
-                    return NotFound("No recent orders found for the provided customer email and ID.");
+                    return NotFound("CustomerId not found");
                 }
+
             }
             catch (Exception ex)
             {

@@ -1,15 +1,11 @@
 ﻿using EcomApi.Services.Models;
 using Microsoft.Extensions.Configuration;
-using System;
-using System.Collections.Generic;
 using System.Data.SqlClient;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+using System.Globalization;
 
 namespace EcomApi.Services.Services
 {
-    public class OrderService:IOrderService
+    public class OrderService : IOrderService
     {
         private readonly IConfiguration _configuration;
         private readonly SqlConnection _dbConnection;
@@ -28,16 +24,20 @@ namespace EcomApi.Services.Services
             c.FIRSTNAME,
             c.LASTNAME,
             o.ORDERID AS OrderNumber,
-            o.ORDERDATE,
+            FORMAT(o.ORDERDATE, 'dd-MMM-yyyy') AS ORDERDATE,
             CONCAT(c.HOUSENO, ' ', c.STREET, ', ', c.TOWN, ', ', c.POSTCODE) AS DeliveryAddress,
-            oi.PRODUCTID AS Product,
+            CASE
+                WHEN o.CONTAINSGIFT = 1 THEN 'Gift'
+                ELSE p.PRODUCTNAME
+            END AS Product,
             oi.QUANTITY,
             oi.PRICE AS PriceEach,
-            o.DELIVERYEXPECTED
+            FORMAT(o.DELIVERYEXPECTED, 'dd-MMM-yyyy') AS DELIVERYEXPECTED
         FROM
             CUSTOMERS c
-            INNER JOIN ORDERS o ON c.CUSTOMERID = o.CUSTOMERID
-            INNER JOIN ORDERITEMS oi ON o.ORDERID = oi.ORDERID
+            LEFT JOIN ORDERS o ON c.CUSTOMERID = o.CUSTOMERID
+            LEFT JOIN ORDERITEMS oi ON o.ORDERID = oi.ORDERID
+            LEFT JOIN PRODUCTS p ON oi.PRODUCTID = p.PRODUCTID
         WHERE
             c.EMAIL = @Email
             AND c.CUSTOMERID = @CustomerId
@@ -59,35 +59,85 @@ namespace EcomApi.Services.Services
                         {
                             Customer = new CustomerModel
                             {
-                                FirstName = reader["FIRSTNAME"].ToString()!,
-                                LastName = reader["LASTNAME"].ToString()!
+                                FirstName = reader["FIRSTNAME"] == DBNull.Value ? null : reader["FIRSTNAME"].ToString(),
+                                LastName = reader["LASTNAME"] == DBNull.Value ? null : reader["LASTNAME"].ToString()
                             },
                             Order = new OrderModel
                             {
-                                OrderNumber = Convert.ToInt32(reader["OrderNumber"]),
-                                OrderDate = Convert.ToDateTime(reader["ORDERDATE"]),
-                                DeliveryAddress = reader["DeliveryAddress"].ToString()!,
+                                OrderNumber = reader["OrderNumber"] == DBNull.Value ? 0 : Convert.ToInt32(reader["OrderNumber"]),
+                                OrderDate = reader["ORDERDATE"] == DBNull.Value ? DateTime.MinValue : DateTime.ParseExact(reader["ORDERDATE"].ToString(), "dd-MMM-yyyy", CultureInfo.InvariantCulture),
+                                DeliveryAddress = reader["DeliveryAddress"] == DBNull.Value ? null : reader["DeliveryAddress"].ToString(),
                                 OrderItems = new List<OrderItemModel>
                         {
                             new OrderItemModel
                             {
-                                Product = reader["Product"].ToString()!,
-                                Quantity = Convert.ToInt32(reader["QUANTITY"]),
-                                PriceEach = Convert.ToDecimal(reader["PriceEach"])
+                                Product = reader["Product"] == DBNull.Value ? null : reader["Product"].ToString(),
+                                Quantity = reader["QUANTITY"] == DBNull.Value ? 0 : Convert.ToInt32(reader["QUANTITY"]),
+                                PriceEach = reader["PriceEach"] == DBNull.Value ? 0 : Convert.ToDecimal(reader["PriceEach"])
                             }
                         },
-                                DeliveryExpected = Convert.ToDateTime(reader["DELIVERYEXPECTED"])
+                                DeliveryExpected = reader["DELIVERYEXPECTED"] == DBNull.Value ? DateTime.MinValue : DateTime.ParseExact(reader["DELIVERYEXPECTED"].ToString(), "dd-MMM-yyyy", CultureInfo.InvariantCulture)
                             }
                         };
 
                         return apiResponse;
                     }
                 }
+               
+                _dbConnection.Close();
             }
 
             return null!;
         }
 
-    }
+        public CustomerModel GetCustomerById(string customerId)
+        {
+            string query = @"
+            SELECT
+                CUSTOMERID,
+                FIRSTNAME,
+                LASTNAME,
+                EMAIL,
+                HOUSENO,
+                STREET,
+                TOWN,
+                POSTCODE
+            FROM
+                CUSTOMERS
+            WHERE
+                CUSTOMERID = @CustomerId";
 
+            using (var command = new SqlCommand(query, _dbConnection))
+            {
+                command.Parameters.AddWithValue("@CustomerId", customerId);
+
+                _dbConnection.Open();
+
+                using (var reader = command.ExecuteReader())
+                {
+                    if (reader.Read())
+                    {
+                        var customer = new CustomerModel
+                        {
+                            CustomerId = reader["CUSTOMERID"].ToString()!,
+                            FirstName = reader["FIRSTNAME"].ToString(),
+                            LastName = reader["LASTNAME"].ToString(),
+                            Email = reader["EMAIL"].ToString(),
+                            HouseNo = reader["HOUSENO"].ToString(),
+                            Street = reader["STREET"].ToString(),
+                            Town = reader["TOWN"].ToString(),
+                            Postcode = reader["POSTCODE"].ToString()
+                        };
+                        _dbConnection.Close();
+                        return customer;
+                    }
+                }
+
+                
+            }
+
+            return null; 
+        }
+
+    }
 }
